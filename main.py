@@ -9,20 +9,15 @@ from osm import MapQuery
 from flask import Flask, render_template, redirect, url_for, request, flash
 from flask import abort
 from flask_bootstrap import Bootstrap
-from flask_ckeditor import CKEditor
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
-from flask_googlemaps import GoogleMaps
-from flask_googlemaps import Map
 
 from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-ckeditor = CKEditor(app)
 Bootstrap(app)
-GoogleMaps(app)
 
 year = dt.datetime.now().year
 app.config['SECRET_KEY'] = "123"
@@ -31,7 +26,6 @@ app.config['SECRET_KEY'] = "123"
 ## CONNECT TO DB
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL",  "sqlite:///bookshops.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['GOOGLEMAPS_KEY'] = "AIzaSyA0ZfOh9dwpZXB3r5RoiA8_ZA7fUYM5Nq0"
 db = SQLAlchemy(app)
 
 # LOGIN PERMISSIONS SETUP
