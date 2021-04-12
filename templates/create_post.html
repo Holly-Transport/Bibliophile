@@ -1,0 +1,41 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% include "header.html" %}
+{% include "nav.html" %}
+<body>
+  <header class="masthead">
+    <div class="container">
+      <div class="row h-100">
+        <div class="col-lg-7 my-auto">
+          <div class="header-content mx-auto">
+            <h1 class="mb-5">Add a Cool Book Place!<br>   ⬇ </h1>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <br>
+        <br>
+        {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "warning"}) }}
+      </div>
+    </div>
+  </div>
+</body>
+
+{% include "footer.html" %}
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="./static/vendor/jquery/jquery.min.js"></script>
+  <script src="./static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="./static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="./static/js/new-age.min.js"></script>
+
+

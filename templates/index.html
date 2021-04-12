@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "header.html" %}
+{% include "nav.html" %}
+
+<body id="page-top">
+
+  <header class="masthead">
+    <div class="container h-100">
+      <div class="row h-100">
+        <div class="col-lg-7 my-auto">
+          <div class="header-content mx-auto">
+            <h1 class="mb-5">Hey, Bibliophile! <br> Tired of screens? Find your real book source here.</h1>
+            <a href="{{url_for('register')}}" class="btn btn-outline btn-xl js-scroll-trigger">Join the Community!</a>
+          </div>
+        </div>
+        <div class="col-lg-5 my-auto">
+          <div class="bounding-box">
+            <img src="https://images.unsplash.com/photo-1554896541-dff010081afe?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1349&q=80" width="415"
+            height="375" alt="cafe">
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="features">
+  <div class="container">
+  <div class="row">
+
+      <div class="col-lg-12 mx-auto">
+      <h2>DC Book Sources</h2>
+      <p>List based on Open Street Map database query of libraries and bookshops.</p>
+      <table class="table w-auto table-hover table-responsive">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Type</th>
+              <th scope="col">Location</th>
+              <th scope="col">Vibe</th>
+               {% if logged_in: %}
+              <th scope="col">Edit</th>
+              {% endif %}
+            </tr>
+          </thead>
+
+          <tbody>
+          {% for place in places: %}
+            <tr>
+                {% if place['website'] == "n/a": %}
+                <th scope="row">{{place["name"]}}</th>
+
+                {% elif place['website'] != "n/a": %}
+                <th scope="row"><a href="{{place['website']}}">{{place["name"]}}</th>
+                {% endif %}
+
+              <td>{{place["type"]}}</td>
+              <td><a href="https://www.google.com/maps/@{{place['lat']}},{{place['lon']}},20z" target="_blank">Map</a></td>
+              <td>{{place["vibe"]}}</td>
+            {% if logged_in: %}
+              <td><a href="{{url_for('edit_post', num=place['id'])}}">✏️</td>
+            {% endif %}
+            </tr>
+          {% endfor %}
+          </tbody>
+
+
+  	  </table>
+      </div>
+
+<!--      <div class="col-lg-4 mx-auto">-->
+<!--      {{googlemap("my_awesome_map", lat=0.23234234, lng=-0.234234234, markers=[(0.12, -0.45345)], style = 'width:300px; height:300px;')}}-->
+<!--      </div>-->
+
+  </div>
+  </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta-content">
+      <div class="container">
+        <h2>Stop waiting.<br>Start reading.<br>But not from a screen.</h2>
+        <a href="{{url_for('register')}}" class="btn btn-outline btn-xl js-scroll-trigger">Join the Community!</a>
+      </div>
+    </div>
+    <div class="overlay"></div>
+  </section>
+
+{% include "footer.html" %}
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="./static/vendor/jquery/jquery.min.js"></script>
+  <script src="./static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="./static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="./static/js/new-age.min.js"></script>
+
+</body>
+</html>

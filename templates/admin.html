@@ -1,0 +1,180 @@
+
+
+{% block content %}
+
+{% include "header.html" %}
+<body>
+
+{% include "nav.html" %}
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1536181783029-1097aaf179de?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>The Board</h1>
+            <span class="subheading">Where all the big secret decisions are made</span>
+            <br>
+              <a style ="font-size:12px; color:#d3e0ea;"  href="https://images.unsplash.com/photo-1536181783029-1097aaf179de?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80"target="_blank">Image Source</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+{% include "nav.html" %}
+
+  <!-- Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+    <a class="btn btn-primary float-left" href=/new_post>Create New Post</a>
+        <br>
+        <br>
+    <a class="btn btn-primary float-left" href=/add_port>Create New Portfolio Entry</a>
+      </div>
+    </div>
+  </div>
+<br>
+<br>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+    <h2>Post Record</h2>
+	  <table class="table w-auto table-hover table-responsive">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Date</th>
+              <th scope="col">Title</th>
+              <th scope="col">Author</th>
+              <th scope="col">Edit</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          {% for blog in blogs %}
+            <tr>
+              <th scope="row">{{blog["id"]}}</th>
+              <td>{{blog["date"]}}</td>
+              <td>{{blog["title"]}}</td>
+              <td>{{blog["author"]["name"]}}</td>
+              <td><a href="{{url_for('edit_post', num=blog['id'])}}">✏️</td>
+            </tr>
+          </tbody>
+          {% endfor %}
+
+  	  </table>
+      </div>
+    </div>
+  </div>
+<br>
+<br>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+    <h2>Users</h2>
+    <table class="table w-auto table-hover table-responsive">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          {% for user in users %}
+            <tr>
+              <th scope="row">{{user["id"]}}</th>
+              <td>{{user["name"]}}</td>
+              <td>{{user["email"]}}</td>
+              <td><a href="{{url_for('delete_user', num=user['id'])}}">🗑️</td>
+            </tr>
+          </tbody>
+          {% endfor %}
+  	  </table>
+      </div>
+    </div>
+  </div>
+
+<br>
+<br>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+    <h2>Comments</h2>
+    <table class="table w-auto table-hover table-responsive">
+          <thead>
+            <tr>
+              <th scope="col">Blog ID</th>
+                <th scope="col">Blog Title</th>
+              <th scope="col">Name</th>
+              <th scope="col">Comment</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          {% for comment in comments %}
+            <tr>
+              <th scope="row">{{comment["post_id"]}}</th>
+                <th scope="row">{{comment["parent_post"]["title"]}}</th>
+              <td>{{comment["comment_author"]["name"]}}</td>
+              <td>{{comment["text"] | safe}}</td>
+              <td><a href="{{url_for('delete_comment', num=comment['id'])}}">🗑️</td>
+            </tr>
+          </tbody>
+          {% endfor %}
+  	  </table>
+      </div>
+    </div>
+  </div>
+
+<br>
+<br>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+    <h2>Portfolio</h2>
+    <table class="table w-auto table-hover table-responsive">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Date</th>
+              <th scope="col">Topic</th>
+              <th scope="col">Title</th>
+              <th scope="col">Edit</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          {% for entry in portfolio %}
+            <tr>
+              <th scope="row">{{entry['id']}}</th>
+                <th scope="row">{{entry['date']}}</th>
+              <td>{{entry['topic']}}</td>
+              <td>{{entry['title']}}</td>
+              <td><a href="{{url_for('edit_port', num=entry['id'])}}">✏️</td>
+            </tr>
+          </tbody>
+          {% endfor %}
+  	  </table>
+      </div>
+    </div>
+  </div>
+{% include "footer.html" %}
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="static/vendor/jquery/jquery.min.js"></script>
+  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="static/js/clean-blog.min.js"></script>
+
+</body>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% include "header.html" %}
+{% include "nav.html" %}
+
+<body>
+  <header class="masthead">
+    <div class="container">
+      <div class="row h-100">
+        <div class="col-lg-7 my-auto">
+          <div class="header-content mx-auto">
+            <h1 class="mb-5">Sign Up.<br>   ⬇ </h1>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+      <div class="col-lg-7 mx-auto">
+        <br>
+        <br>
+        <br>
+       {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "warning"}) }}
+      </div>
+
+
+  </body>
