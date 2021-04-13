@@ -29,3 +29,6 @@ The database just includes two tables, one for the book locations and one for us
 Here is a screenshot of the OSM query class, which relies on the Overpass Turbo query engine (https://overpass-turbo.eu/).
 
 ![app_screenshot](https://github.com/Holly-Transport/Bibliophile/blob/master/screenshots/app7.png)
+
+# Acknowledgements
+Used a Bootstrap design template from https://startbootstrap.com/ to get started. 
